@@ -1,0 +1,21 @@
+#include <iostream>
+
+int main() {
+    std::cout << "=== Task 5: Expressions & Precedence Demonstration ===\n";
+
+    int x = 5, y = 3;
+    std::cout << x + y * 2 << " " << (x + y) * 2 << "\n"; // Precedence: * before +
+
+    std::cout << (x > y ? x : y) << "\n";                // Ternary conditional operator
+
+    std::cout << 10 / 3 << " " << 10 % 3 << " " 
+              << -10 / 3 << " " << -10 % 3 << "\n";      // Division and Modulo behavior
+
+    int k = 0;
+    for (int i = 0; i < 10; i += 3) {
+        k += i;
+    }
+    std::cout << "Loop Accumulated Result k: " << k << "\n";
+
+    return 0;
+}
