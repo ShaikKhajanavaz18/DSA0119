@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+// Enumeration for Metro Zones
+enum class Zone { Inner = 1, Middle = 2, Outer = 3 };
+
+// Object 1: Passenger
+class Passenger {
+private:
+    std::string passengerId;
+    bool isConcessionEligible; // Student / Senior Citizen
+
+public:
+    Passenger(std::string id, bool concession) 
+        : passengerId(id), isConcessionEligible(concession) {}
+    
+    bool getConcession() const { return isConcessionEligible; }
+};
+
+// Object 2: SmartCard
+class SmartCard {
+private:
+    std::string cardId;
+    long long balancePaise; // Stored in integer paise to avoid rounding errors
+    static constexpr long long MIN_BALANCE_PAISE = 5000; // Rs 50 rule
+
+public:
+    SmartCard(std::string id, long long initialBalancePaise) 
+        : cardId(id), balancePaise(initialBalancePaise) {}
+
+    bool canTravel(long long farePaise) const {
+        return (balancePaise - farePaise) >= MIN_BALANCE_PAISE;
+    }
+
+    bool deductFare(long long farePaise) {
+        if (canTravel(farePaise)) {
+            balancePaise -= farePaise;
+            return true;
+        }
+        return false;
+    }
+
+    long long getBalancePaise() const { return balancePaise; }
+};
+
+int main() {
+    std::cout << "=== Task 1: Object-Oriented Domain Model ===\n";
+    SmartCard card("CARD_1001", 10000); // Rs 100 balance
+    std::cout << "Initial Card Balance: Rs " << card.getBalancePaise() / 100.0 << "\n";
+    std::cout << "Can afford Rs 30 fare? " << (card.canTravel(3000) ? "Yes" : "No") << "\n";
+    return 0;
+}
