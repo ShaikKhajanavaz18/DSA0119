@@ -1,0 +1,47 @@
+#include <iostream>
+#include <iomanip>
+
+enum class Zone { Inner, Middle, Outer, Airport };
+
+class MetroEngine {
+public:
+    static long long calculateFare(Zone zone, bool isPeak, bool isWeekend, bool hasPass, Zone passZ1, Zone passZ2) {
+        // Rule 1: Monthly Pass grants unlimited travel in 2 chosen zones
+        if (hasPass && (zone == passZ1 || zone == passZ2)) {
+            return 0;
+        }
+
+        // Rule 2: Base Fare Determination
+        long long basePaise = 0;
+        switch (zone) {
+            case Zone::Inner:   basePaise = 1000; break;
+            case Zone::Middle:  basePaise = 2000; break;
+            case Zone::Outer:   basePaise = 3000; break;
+            case Zone::Airport: basePaise = 6000; break; // Fourth Zone (Airport): Rs 60
+        }
+
+        // Rule 3: Discounts and Peak Surcharges (Weekend discount does NOT combine with peak surcharge)
+        if (isWeekend) {
+            basePaise -= (basePaise * 10) / 100; // 10% Weekend discount
+        } else if (isPeak) {
+            basePaise += (basePaise * 20) / 100; // 20% Peak surcharge
+        }
+
+        return basePaise;
+    }
+};
+
+int main() {
+    std::cout << "=== Task 12: Extended Day-4 Design Challenge Engine ===\n";
+
+    long long fareAirport = MetroEngine::calculateFare(Zone::Airport, false, false, false, Zone::Inner, Zone::Middle);
+    std::cout << "Airport Zone Fare (Standard): Rs " << (fareAirport / 100.0) << "\n";
+
+    long long fareWeekend = MetroEngine::calculateFare(Zone::Outer, true, true, false, Zone::Inner, Zone::Middle);
+    std::cout << "Outer Zone Fare (Weekend Discount Applied): Rs " << (fareWeekend / 100.0) << "\n";
+
+    long long farePass = MetroEngine::calculateFare(Zone::Inner, false, false, true, Zone::Inner, Zone::Middle);
+    std::cout << "Inner Zone Fare (Monthly Pass Active): Rs " << (farePass / 100.0) << "\n";
+
+    return 0;
+}
