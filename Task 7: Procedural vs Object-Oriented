@@ -1,0 +1,49 @@
+#include <iostream>
+#include <iomanip>
+
+// Object-Oriented Approach: Enforces Data Encapsulation
+class SmartCard {
+private:
+    long long balancePaise;
+    static constexpr long long MIN_BALANCE_PAISE = 5000; // Enforced threshold
+
+public:
+    explicit SmartCard(long long initialBalance) : balancePaise(initialBalance) {}
+
+    bool canTravel(long long fare) const {
+        return (balancePaise - fare) >= MIN_BALANCE_PAISE;
+    }
+
+    bool deduct(long long fare) {
+        if (canTravel(fare)) {
+            balancePaise -= fare;
+            return true;
+        }
+        return false;
+    }
+
+    void printState() const {
+        std::cout << "Card Balance: Rs " << std::fixed << std::setprecision(2) 
+                  << (balancePaise / 100.0) << "\n";
+    }
+};
+
+int main() {
+    std::cout << "=== Task 7: Object-Oriented Architecture Demonstration ===\n";
+    SmartCard card(10000); // Rs 100
+    card.printState();
+
+    long long f1 = 1000;   // Rs 10
+    if (card.deduct(f1)) {
+        std::cout << "Fare Rs 10.00 deducted successfully.\n";
+    }
+    card.printState();
+
+    long long f2 = 5000;   // Rs 50 fare (leaves Rs 40, violating Rs 50 min threshold)
+    if (!card.deduct(f2)) {
+        std::cout << "Fare Rs 50.00 DENIED! Enforcing minimum balance rule.\n";
+    }
+    card.printState();
+
+    return 0;
+}
