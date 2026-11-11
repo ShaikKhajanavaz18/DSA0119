@@ -1,0 +1,17 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::cout << "=== Task 10: Large Scale Daily Revenue Simulation ===\n";
+    
+    long long totalJourneys = 3000000; // 3 Million journeys/day
+    long long farePerJourneyPaise = 2000; // Average Rs 20 fare
+    
+    long long networkTotalPaise = totalJourneys * farePerJourneyPaise;
+    
+    std::cout << "Total Journeys: " << totalJourneys << "\n";
+    std::cout << "Network Daily Total (Paise): " << networkTotalPaise << "\n";
+    std::cout << "Network Daily Total (Rupees): Rs " << (networkTotalPaise / 100.0) << "\n";
+    
+    return 0;
+}
