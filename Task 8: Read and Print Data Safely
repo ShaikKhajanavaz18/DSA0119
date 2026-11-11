@@ -1,0 +1,27 @@
+#include <iostream>
+#include <limits>
+#include <iomanip>
+
+void safeReadHour(int& hour) {
+    while (true) {
+        std::cout << "Enter hour of travel (0-23): ";
+        if (std::cin >> hour && hour >= 0 && hour <= 23) {
+            break; // Valid integer input
+        }
+        std::cout << "Invalid input! Please enter an integer between 0 and 23.\n";
+        std::cin.clear(); // Clear stream error flags
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid buffer
+    }
+}
+
+int main() {
+    std::cout << "=== Task 8: Robust Console Input Validation ===\n";
+    int hour = 0;
+    // safeReadHour(hour); // Interactive prompt
+    
+    // Formatted output report
+    long long farePaise = 3600;
+    std::cout << "Formatted Journey Fare: Rs " << std::fixed << std::setprecision(2) 
+              << (farePaise / 100.0) << "\n";
+    return 0;
+}
