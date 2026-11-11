@@ -1,0 +1,27 @@
+#include <iostream>
+
+// Production-ready Metro Fare System interface definition
+class IMetroFareEngine {
+public:
+    virtual ~IMetroFareEngine() = default;
+    virtual long long computeFare(int zoneId, bool isPeak) const = 0;
+};
+
+class ProductionFareEngine : public IMetroFareEngine {
+private:
+    static constexpr long long FARES_PAISE[] = {1000, 2000, 3000};
+
+public:
+    long long computeFare(int zoneId, bool isPeak) const override {
+        if (zoneId < 0 || zoneId > 2) return -1;
+        long long f = FARES_PAISE[zoneId];
+        return isPeak ? f + (f * 20) / 100 : f;
+    }
+};
+
+int main() {
+    std::cout << "=== Task 11: Production Design Interface Architecture ===\n";
+    ProductionFareEngine engine;
+    std::cout << "Outer Zone Peak Fare: Rs " << engine.computeFare(2, true) / 100.0 << "\n";
+    return 0;
+}
