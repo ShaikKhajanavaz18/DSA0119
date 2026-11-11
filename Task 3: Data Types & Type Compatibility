@@ -1,0 +1,25 @@
+#include <iostream>
+#include <climits>
+#include <iomanip>
+
+int main() {
+    std::cout << "=== Task 3: Data Type Sizes and Integer Currency ===\n";
+    std::cout << "sizeof(int): " << sizeof(int) << " bytes\n";
+    std::cout << "sizeof(long long): " << sizeof(long long) << " bytes\n";
+    std::cout << "sizeof(double): " << sizeof(double) << " bytes\n";
+
+    // Demonstrating double floating-point precision error accumulation vs Integer Paise
+    double doubleTotal = 0.0;
+    long long paiseTotal = 0;
+
+    for (int i = 0; i < 100000; ++i) {
+        doubleTotal += 10.10; // Rs 10.10 in double
+        paiseTotal += 1010;   // 1010 paise in long long
+    }
+
+    std::cout << std::fixed << std::setprecision(10);
+    std::cout << "Accumulated double total (100,000 journeys): Rs " << doubleTotal << "\n";
+    std::cout << "Accumulated exact paise total: Rs " << (paiseTotal / 100.0) << "\n";
+
+    return 0;
+}
