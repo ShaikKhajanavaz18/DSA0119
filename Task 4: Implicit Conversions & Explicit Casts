@@ -1,0 +1,25 @@
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    std::cout << "=== Task 4: Predict & Demonstrate Conversions ===\n";
+
+    int a = 7, b = 2;
+    double c = a / b;                       // Implicit conversion: integer division 7/2 = 3 -> 3.0
+    double d = static_cast<double>(a) / b;  // Explicit cast: 7.0 / 2 = 3.5
+
+    std::cout << c << " " << d << "\n";
+
+    char ch = 'A' + 2;                      // Char promoted to int (65 + 2 = 67), converted to 'C'
+    std::cout << ch << "\n";
+
+    bool flag = 5;                          // Non-zero int converts to true (1)
+    std::cout << flag << " " << std::boolalpha << flag << "\n";
+
+    unsigned int u = 1;
+    int s = -1;
+    // Signed -1 converted to unsigned UINT_MAX, leading to s >= u
+    std::cout << (s < u ? "s < u" : "s >= u") << "\n";
+
+    return 0;
+}
