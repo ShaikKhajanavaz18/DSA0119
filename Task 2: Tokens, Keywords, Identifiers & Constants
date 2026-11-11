@@ -1,0 +1,20 @@
+#include <iostream>
+
+// Scoped enum class prevents name collisions and provides type safety
+enum class Zone { Inner, Middle, Outer };
+
+// constexpr constants evaluated at compile-time (Preferred over #define and const)
+constexpr long long FARE_INNER_PAISE  = 1000; // Rs 10
+constexpr long long FARE_MIDDLE_PAISE = 2000; // Rs 20
+constexpr long long FARE_OUTER_PAISE  = 3000; // Rs 30
+constexpr int PEAK_SURCHARGE_PERCENT  = 20;   // 20% surcharge
+
+int main() {
+    std::cout << "=== Task 2: Constants & Enum Class Demonstration ===\n";
+    std::cout << "Inner Zone Base Fare: Rs " << FARE_INNER_PAISE / 100.0 << "\n";
+    std::cout << "Middle Zone Base Fare: Rs " << FARE_MIDDLE_PAISE / 100.0 << "\n";
+    std::cout << "Outer Zone Base Fare: Rs " << FARE_OUTER_PAISE / 100.0 << "\n";
+    std::cout << "Peak Hours Surcharge: " << PEAK_SURCHARGE_PERCENT << "%\n";
+    return 0;
+}
+                                                  
